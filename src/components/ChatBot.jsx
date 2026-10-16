@@ -17,7 +17,7 @@ const intents = [
     chip: 'What tools do you use?',
     keywords: ['tool', 'tools', 'stack', 'software'],
     reply:
-      'My stack spans marketing (Mailchimp, Meta Ads), AI & automation (ChatGPT, Gemini, GoHighLevel), development (VS Code, React + Tailwind), design (Canva, Figma, Photoshop), and video (CapCut, Premiere Pro). Scrolling you to the Tools section now!',
+      'My work connects automation and CRM (GoHighLevel, Make.com, n8n), web systems (React, WordPress, Joomla), content and SEO, and practical integrations. Scrolling you to the Capabilities section now!',
     scrollTo: 'tools',
   },
   {
@@ -46,7 +46,7 @@ const intents = [
     chip: 'Who is Prince?',
     keywords: ['who are you', 'who is prince', 'about you', 'about prince', 'background', 'experience', 'bio'],
     reply:
-      "I'm Prince John Nobleza, an Automation Specialist and Web Developer from Marilao, Bulacan, Philippines. I build CRM automations with Make.com and n8n, develop websites (React, WordPress), and handle IT infrastructure — currently at Nexistry Digital Solutions, finishing my BS in Information Technology in 2026.",
+      "I'm Prince John Nobleza, an Automation Specialist and Web Developer from Marilao, Bulacan, Philippines. I build CRM automations with Make.com and n8n, develop websites with React and CMS platforms, and support related IT infrastructure. I completed my BS in Information Technology in May 2026.",
   },
   {
     id: 'resume',
@@ -95,7 +95,8 @@ export default function ChatBot() {
   const scrollRef = useRef(null)
 
   useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' })
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: reduceMotion ? 'auto' : 'smooth' })
   }, [messages, open])
 
   const respond = text => {
@@ -120,7 +121,7 @@ export default function ChatBot() {
   return (
     <>
       {open && (
-        <div className="fixed bottom-24 right-6 z-[90] w-[350px] max-w-[calc(100vw-3rem)] h-[480px] max-h-[70vh] flex flex-col border-hard rounded-lg shadow-hard bg-white dark:bg-[#0d0d0d] overflow-hidden">
+        <div className="fixed bottom-20 right-4 sm:bottom-24 sm:right-6 z-[90] w-[350px] max-w-[calc(100vw-2rem)] h-[480px] max-h-[70vh] flex flex-col border-hard rounded-lg shadow-hard bg-white dark:bg-[#0d0d0d] overflow-hidden">
           <div className="flex items-center gap-3 px-4 py-3 border-b-2 border-black/10 dark:border-white/10 bg-cream dark:bg-black">
             <img src={botAvatar} alt="" className="w-10 h-10 rounded-full object-cover border-2 border-orange-500" />
             <div className="flex-1 min-w-0">
@@ -206,7 +207,7 @@ export default function ChatBot() {
       <button
         onClick={() => setOpen(o => !o)}
         aria-label={open ? 'Close chat' : 'Open chat'}
-        className="fixed bottom-6 right-6 z-[90] w-16 h-16 rounded-full border-hard shadow-hard bg-orange-600 flex items-center justify-center overflow-hidden hover:scale-105 transition-transform"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[90] w-14 h-14 sm:w-16 sm:h-16 rounded-full border-hard shadow-hard bg-orange-600 flex items-center justify-center overflow-hidden hover:scale-105 transition-transform"
       >
         {open ? (
           <X size={26} className="text-white" />
